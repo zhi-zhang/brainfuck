@@ -2,12 +2,22 @@
 #include "gtest/gtest.h"
 #include "io_lib.h"
 
-//TEST(example_test_suit, example_test){EXPECT_EQ(2*2*2, cubic(2));}
+#include <iostream>
+#include <sstream>
 
 TEST(example_test_suit, example_text)
 {
     std::ostringstream os{};
     hello_world(os);
     EXPECT_EQ(os.str(), "hello world\n");
+}
+
+TEST(io_test_suit, read_single_line)
+{
+    std::istringstream input{};
+    auto const test_string = "test\n";
+    input.str(test_string);
+    auto const result = read_program(input);
+    EXPECT_STREQ("test", result.c_str());
 }
 
