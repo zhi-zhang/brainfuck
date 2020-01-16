@@ -10,7 +10,7 @@ inline std::ostream & hello_world(std::ostream & os)
 
 /**
  * \brief read the whole bf program from an input source.
- * \todo currently only read a single line.
+ * \todo test with cin.
  * \param input input source to read from.
  * \return the read in bf program.
  */
@@ -20,8 +20,7 @@ inline auto read_program(std::istream & input)
     auto constexpr buffer_size = 100000;
     buffer.resize(buffer_size);
     auto characters_read = decltype(input.gcount()){};
-    input.getline(buffer.data(), buffer.capacity());
-    characters_read += input.gcount();
+    characters_read += input.readsome(buffer.data(), buffer.capacity());
     buffer.resize(characters_read);
     return buffer;
 }

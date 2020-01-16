@@ -18,6 +18,14 @@ TEST(io_test_suit, read_single_line)
     auto const test_string = "test\n";
     input.str(test_string);
     auto const result = read_program(input);
-    EXPECT_STREQ("test", result.c_str());
+    EXPECT_STREQ(test_string, result.c_str());
 }
 
+TEST(io_test_suit, read_multiple_lines)
+{
+    std::istringstream input{};
+    auto const test_string = "test\ntest line 2\n";
+    input.str(test_string);
+    auto const result = read_program(input);
+    EXPECT_STREQ(test_string, result.c_str());
+}
