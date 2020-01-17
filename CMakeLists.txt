@@ -20,8 +20,12 @@ add_library(io_lib INTERFACE)
 target_include_directories(io_lib INTERFACE include)
 target_sources(io_lib INTERFACE include/io_lib.h)
 
+add_library(interpreter_lib INTERFACE)
+target_include_directories(interpreter_lib INTERFACE include)
+target_sources(interpreter_lib INTERFACE include/io_lib.h include/interpreter.h)
+
 target_include_directories(bf PRIVATE include)
-target_link_libraries(bf PRIVATE io_lib)
+target_link_libraries(bf PRIVATE io_lib interpreter_lib)
 
 
 # https://cliutils.gitlab.io/modern-cmake/chapters/testing/googletest.html
@@ -60,6 +64,7 @@ macro(package_add_test_with_libraries TESTNAME FILES LIBRARIES TEST_WORKING_DIRE
 endmacro()
 
 package_add_test_with_libraries(io test/io.cpp io_lib "${PROJECT_DIR}/test_data/")
+package_add_test_with_libraries(interpreter test/interpreter.cpp interpreter_lib "${PROJECT_DIR}/test_data/")
 
 
 if (MSVC)
