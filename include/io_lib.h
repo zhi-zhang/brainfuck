@@ -1,6 +1,12 @@
 #pragma once
 
 #include <iostream>
+#include <algorithm>
+#include <array>
+#include <type_traits>
+
+auto constexpr valid_commands =
+    std::array{'>', '<', '+', '-', '.', ',', '[', ']'};
 inline std::ostream & hello_world(std::ostream & os)
 {
     os << "hello world\n";
@@ -36,4 +42,15 @@ inline auto read_program(std::istream & input)
 
     buffer.resize(characters_read);
     return buffer;
+}
+
+inline auto strip_program(std::string program)
+{
+    using character_type = std::remove_reference_t<decltype(program)>::value_type;
+    auto const end_of_valid_program = std::remove_if(std::begin(program), std::end(program), 
+        [](character_type const character) {
+            return std::find(std::begin(valid_commands), std::end(valid_commands),
+                character) == std::end(valid_commands);
+    });
+    return std::string(std::begin(program), end_of_valid_program);
 }
