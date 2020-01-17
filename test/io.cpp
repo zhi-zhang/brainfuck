@@ -4,7 +4,29 @@
 
 #include <iostream>
 #include <sstream>
+#include <string>
 
+auto constexpr example_program = "\
+++ Cell c0 = 2\
+> +++++ Cell c1 = 5\
+\
+[Start your loops with your cell pointer on the loop counter(\
+c1 in our case) < +Add 1 to c0 > -Subtract 1 from c1] End your\
+loops with the cell pointer on the loop counter\
+\
+At this point our program has added 5 to 2 leaving 7 in\
+c0 and 0 in c1 but we cannot output this value to the\
+terminal since it is not ASCII encoded !\
+\
+To display the ASCII character \"7\" we must add 48 to the value 7 48 =\
+6 * 8 so let's use another loop to help us!\
+\
+++++++++ c1 = 8 and this will be our loop counter again\
+[<++++++ Add 6 to c0\
+> - Subtract 1 from c1\
+]\
+<. Print out c0 which has the value 55 which translates to \"7\" !\
+";
 TEST(example_test_suit, example_text)
 {
     std::ostringstream os{};
@@ -41,4 +63,16 @@ TEST(io_test_suit, ignore_remaining_text)
     input.str(test_string);
     auto const result = read_program(input);
     EXPECT_STREQ("test\ntest line 2\n", result.c_str());
+}
+
+/*
+ * \brief Test reading complex program
+ */
+TEST(io_test_suit, complex_program)
+{
+    std::istringstream input{};
+    auto const test_string = std::string{example_program} + "\\\\";
+    input.str(test_string);
+    auto const result = read_program(input);
+    EXPECT_STREQ(example_program, result.c_str());
 }
