@@ -2,6 +2,5 @@
 
 int main()
 {
-   hello_world(std::cout);
     return 0;
 }

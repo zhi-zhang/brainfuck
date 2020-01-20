@@ -7,12 +7,6 @@
 
 auto constexpr valid_commands =
     std::array{'>', '<', '+', '-', '.', ',', '[', ']'};
-inline std::ostream & hello_world(std::ostream & os)
-{
-    os << "hello world\n";
-    return os;
-}
-
 
 /**
  * \brief read the whole bf program from an input source. Stop after reading two consecutive '\\'.

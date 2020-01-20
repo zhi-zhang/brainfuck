@@ -34,13 +34,6 @@ To display the ASCII character \"7\" we must add 48 to the value 7 48 =\
 auto constexpr example_program_stripped = 
 "++>+++++[<+>-]++++++++[<++++++>-]<.";
 
-TEST(example_test_suit, example_text)
-{
-    std::ostringstream os{};
-    hello_world(os);
-    EXPECT_EQ(os.str(), "hello world\n");
-}
-
 TEST(IOTestSuit, ReadSinglLine)
 {
     std::istringstream input{};
