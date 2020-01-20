@@ -41,7 +41,7 @@ TEST(example_test_suit, example_text)
     EXPECT_EQ(os.str(), "hello world\n");
 }
 
-TEST(io_test_suit, read_single_line)
+TEST(IOTestSuit, ReadSinglLine)
 {
     std::istringstream input{};
     auto const test_string = "test\n\\\\\n";
@@ -50,7 +50,7 @@ TEST(io_test_suit, read_single_line)
     EXPECT_STREQ("test\n", result.c_str());
 }
 
-TEST(io_test_suit, read_multiple_lines)
+TEST(IOTestSuit, ReadMultipleLines)
 {
     std::istringstream input{};
     auto const test_string = "test line 1\ntest line 2\n\\\\\n";
@@ -63,7 +63,7 @@ TEST(io_test_suit, read_multiple_lines)
 /**
  * \brief Test read_program stop after reading two consecutive '\\'.
  */
-TEST(io_test_suit, ignore_remaining_text)
+TEST(IOTestSuit, IgnoreRemainingText)
 {
     std::istringstream input{};
     auto const test_string = "test\ntest line 2\n\\\\\njunk";
@@ -75,7 +75,7 @@ TEST(io_test_suit, ignore_remaining_text)
 /*
  * \brief Test reading complex program
  */
-TEST(io_test_suit, complex_program)
+TEST(IOTestSuit, ComplexProgram)
 {
     std::istringstream input{};
     auto const test_string = std::string{example_program_raw} + "\\\\";
@@ -87,7 +87,7 @@ TEST(io_test_suit, complex_program)
 /*
  * \brief Test removing characters not part of bf command set.
  */
-TEST(io_test_suit, strip_comments)
+TEST(IOTestSuit, StripComments)
 {
     auto const result = strip_program(example_program_raw);
     EXPECT_STREQ(example_program_stripped, result.c_str());
