@@ -6,7 +6,7 @@
 namespace
 {
 
-class interpreter_test : public ::testing::TestWithParam<std::size_t>
+class InterpreterTest : public ::testing::TestWithParam<std::size_t>
 {
 public:
     void SetUp() override
@@ -22,7 +22,7 @@ protected:
     std::size_t index_ {};
 };
     
-TEST_P(interpreter_test, increment_data_pointer)
+TEST_P(InterpreterTest, increment_data_pointer)
 {
     auto const data_pointer =
         bf::increment_data_pointer(std::begin(data_stack_)+index_);
@@ -31,7 +31,7 @@ TEST_P(interpreter_test, increment_data_pointer)
 }
 
 INSTANTIATE_TEST_SUITE_P(
-    interpreter_test_suit, interpreter_test,
+    InterpreterTestSuit, InterpreterTest,
     // last valid data stack pointer is (data_stack_size-1)
     ::testing::Values(0, 1, 100, 1000, 10000, bf::data_stack_size-2));
 } // namespace
